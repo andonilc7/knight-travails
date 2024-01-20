@@ -60,14 +60,12 @@ class Graph {
         for (let i=0; i<queue.length; i++) {
            currNode = queue.shift();
           visitedNodes.push(currNode);
-          // console.log(visitedNodes)
           if (currNode.parent != null) {
             currNode.distance = currNode.parent.distance + 1;
           }
           if (currNode.xPosition == endingX && currNode.yPosition == endingY) {
             break;
           }
-          // console.log(currNode)
 
           //have to filter possible moves to take out visited nodes, so only incldue if distance is null
           const possibleMoves = this.findPossibleMoves(currNode.xPosition, currNode.yPosition).filter((move) => {
@@ -81,9 +79,6 @@ class Graph {
           });
         }
       }
-
-      //now need to make array of the nodes from ending node -> parent -> parent etc. to get to starting node,
-      //but use unshift to do reverse order (starting -> next -> next... -> ending)
 
       const nodePathArray = [];
       nodePathArray.push(currNode);
@@ -119,11 +114,7 @@ class Graph {
 }
 
 let graph = new Graph(8);
-// console.log(graph.board)
 graph.knightMoves([0,0], [3,3])
 
 graph.knightMoves([3,3],[0,0])
-
-// only works for the [0,0] => [3,3] run right now!! need to fix!!
-//maybe is flawed that if is visited at all, it counts it as visited, maybe need to rethink a bit...
 graph.knightMoves([0,0],[7,7])
